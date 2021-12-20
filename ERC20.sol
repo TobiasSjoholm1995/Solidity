@@ -51,6 +51,7 @@ contract ERC20 is IERC20, IOptionalERC20 {
 
 
 
+
     // Implementation of IOptionalERC20
 
     function name() public view override returns (string memory) {
@@ -63,6 +64,24 @@ contract ERC20 is IERC20, IOptionalERC20 {
 
     function circulatingSupply() public view override returns (uint256) {
         return _circulatingSupply;
+    }
+
+    function increaseAllowance(address spender, uint256 amount) public override returns (bool) 
+    {
+        uint256 currentAllowence = _allowence[msg.sender][spender];
+
+        _approve(spender, currentAllowence + amount);
+        return true;
+    }
+
+    function decreaseAllowence(address spender, uint256 amount) public override returns (bool) 
+    {
+        uint256 currentAllowence = _allowence[msg.sender][spender];
+
+        require(currentAllowence >= amount, "Not enough allowence to decrease");
+
+        _approve(spender, currentAllowence - amount);
+        return true;
     }
 
 
@@ -88,20 +107,7 @@ contract ERC20 is IERC20, IOptionalERC20 {
 
     function approve(address spender, uint256 amount) external override returns (bool) 
     {
-        require(msg.sender != address(0),     "ERC20: Zero address is not allowed to send tokens.");
-        require(spender != address(0),        "ERC20: Zero address is not allowed to spend tokens.");
-        require(amount <= _circulatingSupply, "ERC20: Invalid amount, it exceeds circulating supply.");
-
-        // NOTE: This function works different compared to OpenZeppelin own implementation
-        // as their implementation has a security flaw: 
-        // https://docs.google.com/document/d/1YLPtQxZu1UAvO9cZ1O2RPXBbT0mooh4DYKjA_jp-RLM/edit#heading=h.d485qg6c4olu
-
-        unchecked {
-            _allowence[msg.sender][spender] += amount;
-        }
-
-        emit Approval(msg.sender, spender, amount);
-        return true;
+        return _approve(spender, amount);
     }
 
     function transferFrom(address sender, address recipient, uint256 amount) external override returns (bool) {
@@ -134,4 +140,16 @@ contract ERC20 is IERC20, IOptionalERC20 {
         emit Transfer(sender, receiver, amount);
         return true;
     }  
+
+    function _approve(address spender, uint256 amount) private returns (bool) 
+    {
+        require(msg.sender != address(0),     "ERC20: Zero address is not allowed to send tokens.");
+        require(spender != address(0),        "ERC20: Zero address is not allowed to spend tokens.");
+        require(amount <= _circulatingSupply, "ERC20: Invalid amount, it exceeds circulating supply.");
+
+        _allowence[msg.sender][spender] = amount;
+
+        emit Approval(msg.sender, spender, amount);
+        return true;
+    }
 }
