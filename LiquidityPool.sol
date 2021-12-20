@@ -21,7 +21,7 @@ contract LiquidityPool {
     function swapToken2ForToken1(uint256 amount) external {
         uint256 returnAmount = getTradeAmount(amount, false);
 
-        require(_token2.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Allowence too low.");
+        require(_token2.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Allowance too low.");
         require(_balance1 >= returnAmount, "Liquidity Pool: Not enough tokens in the pool.");
 
         bool success1 = _token2.transferFrom(msg.sender, address(this), amount);
@@ -34,7 +34,7 @@ contract LiquidityPool {
     function swapToken1ForToken2(uint256 amount) external {
         uint256 returnAmount = getTradeAmount(amount, true);
 
-        require(_token1.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Allowence too low.");
+        require(_token1.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Allowance too low.");
         require(_balance2 >= returnAmount, "Liquidity Pool: Not enough tokens in the pool.");
 
         bool success1 = _token1.transferFrom(msg.sender, address(this), amount);
@@ -64,8 +64,8 @@ contract LiquidityPool {
 
 
     function provide(uint256 amount) external {
-        require(_token1.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Token1 allowence too low.");
-        require(_token2.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Token2 allowence too low.");
+        require(_token1.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Token1 allowance too low.");
+        require(_token2.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Token2 allowance too low.");
 
         bool success1 = _token1.transferFrom(msg.sender, address(this), amount);
         bool success2 = _token2.transferFrom(msg.sender, address(this), amount);
