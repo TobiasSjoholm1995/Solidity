@@ -74,7 +74,7 @@ contract ERC20 is IERC20, IOptionalERC20 {
         return true;
     }
 
-    function decreaseAllowence(address spender, uint256 amount) public override returns (bool) 
+    function decreaseAllowance(address spender, uint256 amount) public override returns (bool) 
     {
         uint256 currentAllowence = _allowence[msg.sender][spender];
 
