@@ -22,7 +22,7 @@ contract LiquidityPool {
 
 
     function swapToken1ForToken2(uint256 amount) external {
-        uint256 returnAmount = getTradeAmount(amount, true);
+        uint256 returnAmount = getReturnAmount(amount, true);
 
         require(_token1.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Allowance too low.");
         require(_balance2 >= returnAmount, "Liquidity Pool: Not enough tokens in the pool.");
@@ -37,7 +37,7 @@ contract LiquidityPool {
     }
 
     function swapToken2ForToken1(uint256 amount) external {
-        uint256 returnAmount = getTradeAmount(amount, false);
+        uint256 returnAmount = getReturnAmount(amount, false);
 
         require(_token2.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Allowance too low.");
         require(_balance1 >= returnAmount, "Liquidity Pool: Not enough tokens in the pool.");
@@ -54,14 +54,16 @@ contract LiquidityPool {
 
     // note that you tokens are atomic
     // so transfering few tokens is bad as it rounds towards 0
-    function getTradeAmount(uint256 amount, bool token1ForToken2) public view returns (uint256) {
+    function getReturnAmount(uint256 amount, bool token1ForToken2) public view returns (uint256) {
         require(_balance1 != 0 && _balance2 != 0, "Liquidity Pool: There is no available tokens.");
 
-        uint percent = token1ForToken2 ?
-                (_balance1 * 10 ** 2) / _balance2:
-                (_balance2 * 10 ** 2) / _balance1;
+        // using the Constant Product Formula
+        uint256 product = _balance1 * _balance2;
 
-        return amount * 100 / percent;
+        if (token1ForToken2) 
+            return _balance2 - product / (_balance1 + amount);
+        else
+            return _balance1 - product / (_balance1 + amount);
     }
 
     
