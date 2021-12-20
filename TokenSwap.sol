@@ -41,12 +41,12 @@ contract TokenSwap {
 
 
     function swap() public {
-        require(msg.sender == account1 || msg.sender == account2, "Not authorized.");
-        require(token1.allowance(account1, address(this)) >= amount1, "Too low allowence for token1.");
-        require(token2.allowance(account2, address(this)) >= amount2, "Too low allowence for token2.");
+        require(msg.sender == account1 || msg.sender == account2, "Token Swap: Not authorized.");
+        require(token1.allowance(account1, address(this)) >= amount1, "Token Swap: Too low allowence for token1.");
+        require(token2.allowance(account2, address(this)) >= amount2, "Token Swap: Too low allowence for token2.");
 
         bool success1 = token1.transferFrom(account1, account2, amount1);
         bool success2 = token2.transferFrom(account2, account1, amount2);
-        require(success1 && success2, "Transfer failed.");
+        require(success1 && success2, "Token Swap: Transfer failed.");
     }
 }
