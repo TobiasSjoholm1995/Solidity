@@ -63,7 +63,7 @@ contract LiquidityPool {
         if (token1ForToken2) 
             return _balance2 - product / (_balance1 + amount);
         else
-            return _balance1 - product / (_balance1 + amount);
+            return _balance1 - product / (_balance2 + amount);
     }
 
     
