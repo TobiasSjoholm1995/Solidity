@@ -20,5 +20,11 @@ interface IOptionalERC20 {
     function name() external view returns (string memory);
     function symbol() external view returns (string memory);
     function circulatingSupply() external view returns (uint256);
-}
 
+
+    // NOTE: These 2 functions are here due to the security flaw in allowence-function in IERC20
+    // https://docs.google.com/document/d/1YLPtQxZu1UAvO9cZ1O2RPXBbT0mooh4DYKjA_jp-RLM/edit#heading=h.d485qg6c4olu
+
+    function increaseAllowence(address spender, uint256 amount) external override returns (bool);
+    function decreaseAllowence(address spender, uint256 amount) external override returns (bool);
+}
