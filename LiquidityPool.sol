@@ -14,6 +14,8 @@ contract LiquidityPool {
 
 
     constructor(address token1, address token2) {
+        require(token1 != token2, "Invalid arguments, token addresses can't be equal.");
+        
         _token1 = IERC20(token1);
         _token2 = IERC20(token2);
     }
@@ -29,6 +31,9 @@ contract LiquidityPool {
         bool success2 = _token1.transfer(msg.sender, returnAmount);
 
         require(success1 && success2, "Liquidity Pool: Transfer of tokens failed.");
+
+        _balance1 -= returnAmount;
+        _balance2 += amount;
     }
 
     
@@ -42,15 +47,20 @@ contract LiquidityPool {
         bool success2 = _token2.transfer(msg.sender, returnAmount);
 
         require(success1 && success2, "Liquidity Pool: Transfer of tokens failed.");
+
+        _balance1 += amount;
+        _balance2 -= returnAmount;
     }
 
 
     // note that you tokens are atomic
     // so transfering few tokens is bad as it rounds towards 0
     function getTradeAmount(uint256 amount, bool token1ForToken2) public view returns (uint256) {
+        require(_balance1 != 0 && _balance2 != 0, "Liquidity Pool: There is no available tokens.");
+
         uint percent = token1ForToken2 ?
                 (_balance1 * 10 ** 2) / _balance2:
-                (_balance2 * 10 ** 2) / _balance2;
+                (_balance2 * 10 ** 2) / _balance1;
 
         return amount * 100 / percent;
     }
