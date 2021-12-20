@@ -21,7 +21,7 @@ contract LiquidityPool {
     function swapToken2ForToken1(uint256 amount) external {
         uint256 returnAmount = getTradeAmount(amount, false);
 
-        require( _token2.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Allowence too low.");
+        require(_token2.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Allowence too low.");
         require(_balance1 >= returnAmount, "Liquidity Pool: Not enough tokens in the pool.");
 
         bool success1 = _token2.transferFrom(msg.sender, address(this), amount);
