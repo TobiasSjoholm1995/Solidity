@@ -58,7 +58,7 @@ contract LiquidityPool {
         require(_balance1 != 0 && _balance2 != 0, "Liquidity Pool: There is no available tokens.");
 
         // using the Constant Product Formula
-        uint256 product = _balance1 * _balance2;
+        uint product = _balance1 * _balance2;  // overflow, how to handle?
 
         if (token1ForToken2) 
             return _balance2 - product / (_balance1 + amount);
