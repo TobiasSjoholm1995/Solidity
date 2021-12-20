@@ -18,6 +18,7 @@ contract LiquidityPool {
         _token2 = IERC20(token2);
     }
 
+
     function swapToken2ForToken1(uint256 amount) external {
         uint256 returnAmount = getTradeAmount(amount, false);
 
@@ -43,6 +44,7 @@ contract LiquidityPool {
         require(success1 && success2, "Liquidity Pool: Transfer of tokens failed.");
     }
 
+
     // note that you tokens are atomic
     // so transfering few tokens is bad as it rounds towards 0
     function getTradeAmount(uint256 amount, bool token1ForToken2) public view returns (uint256) {
@@ -60,7 +62,6 @@ contract LiquidityPool {
 
         return _quotient;
     }
-
 
 
     function provide(uint256 amount) external {
@@ -92,5 +93,4 @@ contract LiquidityPool {
         _balance2 -= amount;
         _provider[msg.sender] -= amount;
     }
-
 }
