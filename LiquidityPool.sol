@@ -75,7 +75,7 @@ contract LiquidityPool {
     }
 
 
-    function provide(uint256 amount) external {
+    function deposit(uint256 amount) external {
         require(_token1.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Token1 allowance too low.");
         require(_token2.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Token2 allowance too low.");
 
