@@ -27,4 +27,3 @@ interface IOptionalERC20 {
     function increaseAllowance(address spender, uint256 amount) external returns (bool);
     function decreaseAllowance(address spender, uint256 amount) external returns (bool);
 }
-
