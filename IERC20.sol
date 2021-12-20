@@ -24,7 +24,6 @@ interface IOptionalERC20 {
 
     // NOTE: These 2 functions are here due to the security flaw in allowence-function in IERC20
     // https://docs.google.com/document/d/1YLPtQxZu1UAvO9cZ1O2RPXBbT0mooh4DYKjA_jp-RLM/edit#heading=h.d485qg6c4olu
-
     function increaseAllowance(address spender, uint256 amount) external returns (bool);
     function decreaseAllowance(address spender, uint256 amount) external returns (bool);
 }
