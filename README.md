@@ -9,17 +9,17 @@ Don't use them as production code, this is just for fun and to learn.
 This is the interface from EIP-20.
 https://eips.ethereum.org/EIPS/eip-20
 
-<b>ERC20</b>
+<b>ERC20:</b>
 
 This is my own implementation of the ERC20 token standard. 
 It's inspired by Open Zeppelin.
 
-<b>KryptoKings Token</b>
+<b>KryptoKings Token:</b>
 
 This is a concrete ERC20 token that can be used on any EVM compatible network. 
 It is inheriting from my ERC20 token implementation. 
 
-<b>Token Swap</b>
+<b>Token Swap:</b>
 
 The Token Swap allows 2 traders to trade with each other trustless.
 Trustless means that none of the traders need to trust the other trader to transfer the tokens.
