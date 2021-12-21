@@ -132,7 +132,7 @@ contract LiquidityPool {
         }
     }
 
-    function _getRewardAmount(uint256 withdrawAmount_) public view returns (uint256){
+    /*function GetRewardAmount(uint256 withdrawAmount_) public view returns (uint256){
         require(balance1 != 0 && balance2 != 0, "Liquidity Pool: There is no available tokens.");
         
         uint256 currentProduct     = balance1 * balance2;
@@ -147,7 +147,7 @@ contract LiquidityPool {
             uint256 rewardAmount2 = (percentTotalReward * (percentUserReward * balance2)) / 10000;
             return rewardAmount2;
         }
-    }
+    }*/
 
        
     function _percent(uint256 numerator, uint256 denominator) private pure returns(uint256 quotient) {
