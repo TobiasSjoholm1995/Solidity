@@ -10,7 +10,7 @@ This is my own implementation of the ERC20 token standard.
 It's inspired by Open Zeppelin.
 
 
-<b>Guardian</b>
+<b>Guardian:</b>
 
 Protects against a re-entrance attack.
 
@@ -32,6 +32,12 @@ The Token Swap allows 2 traders to trade with each other trustless.
 Trustless means that none of the traders need to trust the other trader to transfer the tokens.
 There is no "I will transfer my tokens first, then I trust you to transfer your tokens to me"
 Both traders instead set allowence to the smart contract and then the smart contract execute the trade.
+
+
+<b>Leveraged Token:</b>
+
+This is a leverage token against the underlying token, which is configured at the constructor.
+This can be used together with the liquidity pool, as the pool requires a 50/50 balance which initilize the 2 tokens in the pool to the same price. If there is an initial price difference between the 2 tokens, a leveraged token can be used.
 
 <b>Liquidity Pool:</b>
 
