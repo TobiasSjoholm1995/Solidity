@@ -97,13 +97,14 @@ contract LiquidityPool {
 
         bool success1 = token1.transfer(msg.sender, amount);
         bool success2 = token2.transfer(msg.sender, amount);
+        bool success3 = _giveReward(amount);
 
-        require(success1 && success2, "Liquidity Pool: Transfer of tokens failed.");
+        require(success1 && success2 && success3, "Liquidity Pool: Transfer of tokens failed.");
 
         balance1 -= amount;
         balance2 -= amount;
         _provider[msg.sender] -= amount;
-        //_giveReward(amount);
+        _depositProduct = balance1 * balance2;
     }
 
 
@@ -112,7 +113,7 @@ contract LiquidityPool {
     }
 
 
-    function _giveReward(uint256 withdrawAmount_) public {
+    function _giveReward(uint256 withdrawAmount_) private returns (bool) {
         require(balance1 != 0 && balance2 != 0, "Liquidity Pool: There is no available tokens.");
         
         uint256 currentProduct     = balance1 * balance2;
@@ -121,16 +122,14 @@ contract LiquidityPool {
 
         if (balance1 >= balance2) {
             uint256 rewardAmount1 = (percentTotalReward * (percentUserReward * balance1)) / 10000;
-            token1.transfer(msg.sender, rewardAmount1);
             balance1 -= rewardAmount1;
+            return token1.transfer(msg.sender, rewardAmount1);
         }
         else {
             uint256 rewardAmount2 = (percentTotalReward * (percentUserReward * balance2)) / 10000;
-            token2.transfer(msg.sender, rewardAmount2);
             balance2 -= rewardAmount2;
+            return token2.transfer(msg.sender, rewardAmount2);
         }
-
-        _depositProduct = balance1 * balance2;
     }
 
     function _getRewardAmount(uint256 withdrawAmount_) public view returns (uint256){
