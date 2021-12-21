@@ -18,6 +18,7 @@ contract LeveragedToken is ERC20, Guardian {
     event Sell(address indexed seller, uint256 value);
 
     constructor(address token_, uint256 leverage_) ERC20(_name, _symbol, _totalSupply) {
+        require(leverage_ != 0, "Leveraged Token: Leverage can't be zero.")
         _mint(address(this), _totalSupply);
 
         token    = IERC20(token_);
@@ -26,26 +27,26 @@ contract LeveragedToken is ERC20, Guardian {
 
 
     function buy(uint256 amount) external guard {
-        require(amount % leverage == 0, "Leverage Token: Amount must be even divisable with the leverage.");
-        require(amount != 0, "Leverage Token: Amount must be greater than zero.");
-        require(token.allowance(msg.sender, address(this)) >= amount, "Leverage Token: Allowance too low.");
+        require(amount % leverage == 0, "Leveraged Token: Amount must be even divisable with the leverage.");
+        require(amount != 0, "Leveraged Token: Amount must be greater than zero.");
+        require(token.allowance(msg.sender, address(this)) >= amount, "Leveraged Token: Allowance too low.");
 
         bool success1 = token.transferFrom(msg.sender, address(this), amount);
         bool success2 = this.transfer(msg.sender, amount / leverage);
 
-        require(success1 && success2, "Leverage Token: Transfer of tokens failed.");
+        require(success1 && success2, "Leveraged Token: Transfer of tokens failed.");
 
         emit Buy(msg.sender, amount);
     }
 
     function sell(uint256 amount) external guard {
-        require(amount != 0, "Leverage Token: Amount must be greater than zero.");
-        require(this.allowance(msg.sender, address(this)) >= amount, "Leverage Token: Allowance too low.");
+        require(amount != 0, "Leveraged Token: Amount must be greater than zero.");
+        require(this.allowance(msg.sender, address(this)) >= amount, "Leveraged Token: Allowance too low.");
 
         bool success1 = this.transferFrom(msg.sender, address(this), amount);
         bool success2 = token.transfer(msg.sender, amount * leverage);
 
-        require(success1 && success2, "Leverage Token: Transfer of tokens failed.");
+        require(success1 && success2, "Leveraged Token: Transfer of tokens failed.");
 
         emit Sell(msg.sender, amount * leverage);
     }
