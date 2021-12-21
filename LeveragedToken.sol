@@ -5,7 +5,7 @@ import "./IERC20.sol";
 import "./ERC20.sol";
 import "./Guardian.sol";
 
-contract LeverageToken is ERC20, Guardian {
+contract LeveragedToken is ERC20, Guardian {
 
     string  constant private _name        = "LeverageToken";
     string  constant private _symbol      = "LT";
