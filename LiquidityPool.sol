@@ -56,14 +56,15 @@ contract LiquidityPool {
     // so transfering few tokens is bad as it rounds off towards 0
     function getReturnAmount(uint256 amount, bool token1ForToken2) public view returns (uint256) {
         require(_balance1 != 0 && _balance2 != 0, "Liquidity Pool: There is no available tokens.");
+        require(amount != 0, "Liquidity Pool: Invalid argument, amount is zero.");
 
         // using the Constant Product Formula
         uint256 product = _balance1 * _balance2; 
 
         if (token1ForToken2) 
-            return _balance2 - product / (_balance1 + amount);
+            return _balance2 - (product / (_balance1 + amount) + 1);
         else
-            return _balance1 - product / (_balance2 + amount);
+            return _balance1 - (product / (_balance2 + amount) + 1);
     }
 
     
@@ -104,6 +105,11 @@ contract LiquidityPool {
         _balance1 -= amount;
         _balance2 -= amount;
         _provider[msg.sender] -= amount;
+    }
+
+    
+    function withdrawAmount(address account) external view returns (uint256) {
+        return _provider[account];
     }
 
     function _overflowCheck() private view {
