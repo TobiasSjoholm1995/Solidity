@@ -6,7 +6,7 @@ import "./IERC20.sol";
 contract LiquidityPool {
     IERC20 public immutable token1;
     IERC20 public immutable token2;
-    uint256 public immutable _waitingTime;
+    uint256 public immutable waitingTime;
 
     uint256 public balance1;
     uint256 public balance2;
@@ -27,7 +27,7 @@ contract LiquidityPool {
         
         token1 = IERC20(token1_);
         token2 = IERC20(token2_);
-        _waitingTime = waitingTime_;
+        waitingTime = waitingTime_;
     }
 
 
@@ -101,7 +101,7 @@ contract LiquidityPool {
 
     function withdraw(uint256 amount) external {
         require(_providers[msg.sender].Amount >= amount, "Liquidity Pool: Withdraw amount exceeds provide amount.");
-        require(_providers[msg.sender].BlockNumber +  _waitingTime <= block.number, "Liquidity Pool: You need to wait before you can withdraw.");
+        require(_providers[msg.sender].BlockNumber +  waitingTime <= block.number, "Liquidity Pool: You need to wait before you can withdraw.");
         require(balance1 >= amount, "Liquidity Pool: There is not enough token1 balance to withdraw right now.");
         require(balance2 >= amount, "Liquidity Pool: There is not enough token2 balance to withdraw right now.");
 
@@ -150,4 +150,3 @@ contract LiquidityPool {
     }
     
 }
-
