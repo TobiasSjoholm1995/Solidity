@@ -35,4 +35,4 @@ The price is adjusted according to the Constant Product Formula.
 
 Anyone can be a liquidity provider and receive rewards. 
 The rewards comes from the swap fees, which is 0.5%.
-It is a minumum holding time of 7 days before you can withdraw ur tokens from the pool and the reward.
+It's a minimum waiting time, that is configured by the creator of the contract, before it's possible to withdraw the tokens from the pool and the reward.
