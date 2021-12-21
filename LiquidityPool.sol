@@ -18,7 +18,6 @@ contract LiquidityPool {
         uint256 BlockNumber;
     }
 
-
     mapping(address => Provider) private _providers;
 
 
