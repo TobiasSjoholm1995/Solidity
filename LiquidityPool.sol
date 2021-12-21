@@ -11,8 +11,15 @@ contract LiquidityPool {
     uint256 public balance2;
 
     uint256 private _depositProduct;
+    uint256 constant _waitingTime = 40320; // 7 days on Ethereum
 
-    mapping(address => uint256) private _provider;
+    struct Provider {
+        uint256 Amount;
+        uint256 BlockNumber;
+    }
+
+
+    mapping(address => Provider) private _providers;
 
 
     constructor(address token1_, address token2_) {
@@ -86,12 +93,14 @@ contract LiquidityPool {
 
         balance1 += amount;
         balance2 += amount;
-        _provider[msg.sender] += amount;
+        _providers[msg.sender].Amount += amount;
+        _providers[msg.sender].BlockNumber = amount;
         _depositProduct = balance1 * balance2;
     }
 
     function withdraw(uint256 amount) external {
-        require(_provider[msg.sender] >= amount, "Liquidity Pool: Withdraw amount exceeds provide amount.");
+        require(_providers[msg.sender].Amount >= amount, "Liquidity Pool: Withdraw amount exceeds provide amount.");
+        require(_providers[msg.sender].BlockNumber +  _waitingTime <= block.number, "Liquidity Pool: You need to wait before you can withdraw.");
         require(balance1 >= amount, "Liquidity Pool: There is not enough token1 balance to withdraw right now.");
         require(balance2 >= amount, "Liquidity Pool: There is not enough token2 balance to withdraw right now.");
 
@@ -103,13 +112,13 @@ contract LiquidityPool {
 
         balance1 -= amount;
         balance2 -= amount;
-        _provider[msg.sender] -= amount;
+        _providers[msg.sender].Amount -= amount;
         _depositProduct = balance1 * balance2;
     }
 
 
     function withdrawAmount(address account) external view returns (uint256) {
-        return _provider[account];
+        return _providers[account].Amount;
     }
 
 
@@ -131,24 +140,6 @@ contract LiquidityPool {
             return token2.transfer(msg.sender, rewardAmount2);
         }
     }
-
-    /*function GetRewardAmount(uint256 withdrawAmount_) public view returns (uint256){
-        require(balance1 != 0 && balance2 != 0, "Liquidity Pool: There is no available tokens.");
-        
-        uint256 currentProduct     = balance1 * balance2;
-        uint256 percentTotalReward = (currentProduct * 100 / _depositProduct) - 100;
-        uint256 percentUserReward  = (withdrawAmount_ + withdrawAmount_) * 100 / (balance1 + balance2);
-
-        if (balance1 >= balance2) {
-            uint256 rewardAmount1 = (percentTotalReward * (percentUserReward * balance1)) / 10000;
-            return rewardAmount1;
-        }
-        else {
-            uint256 rewardAmount2 = (percentTotalReward * (percentUserReward * balance2)) / 10000;
-            return rewardAmount2;
-        }
-    }*/
-
        
     function _percent(uint256 numerator, uint256 denominator) private pure returns(uint256 quotient) {
         uint _numerator = numerator * 10 ** 2;
