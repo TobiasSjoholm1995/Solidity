@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-abstract contract Guard {
+abstract contract Guardian {
 
     // uint256 saves gas comapared to bool
     uint256 private constant _allowed = 1;
