@@ -33,6 +33,6 @@ The idea with the liquidity pool is that it will be possible to swap 2 different
 It is an automated market maker, that will automatically adjust the price depending on the tokens balance in the pool.
 The price is adjusted according to the Constant Product Formula.
 
-Anyone can be a liquidity provider and receeve rewards. 
+Anyone can be a liquidity provider and receive rewards. 
 The rewards comes from the swap fees, which is 0.5%.
 It is a minumum holding time of 7 days before you can withdraw ur tokens from the pool and the reward.
