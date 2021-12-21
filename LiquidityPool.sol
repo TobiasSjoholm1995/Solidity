@@ -53,7 +53,7 @@ contract LiquidityPool {
 
 
     // note that you tokens are atomic
-    // so transfering few tokens is bad as it rounds towards 0
+    // so transfering few tokens is bad as it rounds off towards 0
     function getReturnAmount(uint256 amount, bool token1ForToken2) public view returns (uint256) {
         require(_balance1 != 0 && _balance2 != 0, "Liquidity Pool: There is no available tokens.");
 
