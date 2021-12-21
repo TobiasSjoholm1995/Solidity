@@ -4,6 +4,11 @@ I am learning Solidity and in this repo you will find the contracts I have imple
 Don't use them as production code, this is just for fun and to learn.
 
 
+<b>Guardian</b>
+
+Protects against a re-entrance attack.
+
+
 <b>IERC20:</b>
 
 This is the interface from EIP-20.
