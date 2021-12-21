@@ -6,26 +6,28 @@ import "./IERC20.sol";
 contract LiquidityPool {
     IERC20 public immutable token1;
     IERC20 public immutable token2;
+    uint256 public immutable _waitingTime;
 
     uint256 public balance1;
     uint256 public balance2;
 
     uint256 private _depositProduct;
-    uint256 constant _waitingTime = 40320; // 7 days on Ethereum
 
     struct Provider {
         uint256 Amount;
         uint256 BlockNumber;
     }
 
+
     mapping(address => Provider) private _providers;
 
 
-    constructor(address token1_, address token2_) {
+    constructor(address token1_, address token2_, uint256 waitingTime_) {
         require(token1_ != token2_, "Invalid arguments, token addresses can't be equal.");
         
         token1 = IERC20(token1_);
         token2 = IERC20(token2_);
+        _waitingTime = waitingTime_;
     }
 
 
@@ -148,3 +150,4 @@ contract LiquidityPool {
     }
     
 }
+
