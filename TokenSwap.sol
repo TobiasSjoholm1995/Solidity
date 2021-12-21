@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "./IERC20.sol";
-
+import "./EnterGuard.sol"; 
 
 // How to use the TokenSwap:
 // 1. Anyone can create the contract and configure the tokens and amounts
@@ -12,7 +12,7 @@ import "./IERC20.sol";
 // 5. Any of the traders can call swap function, to execute the trade
 
 
-contract TokenSwap {
+contract TokenSwap is EnterGuard {
 
     // The token and the expected amount is made visible
     // So the traders before they set their own allowence,
@@ -40,7 +40,7 @@ contract TokenSwap {
     }
 
 
-    function swap() public {
+    function swap() public enterOnceOnly {
         require(msg.sender == account1 || msg.sender == account2, "Token Swap: Not authorized.");
         require(token1.allowance(account1, address(this)) >= amount1, "Token Swap: Too low allowence for token1.");
         require(token2.allowance(account2, address(this)) >= amount2, "Token Swap: Too low allowence for token2.");
