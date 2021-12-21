@@ -54,19 +54,19 @@ contract ERC20 is IERC20, IOptionalERC20 {
 
     // Implementation of IOptionalERC20
 
-    function name() public view override returns (string memory) {
+    function name() public view override virtual returns (string memory) {
         return _name;
     }
 
-    function symbol() public view override returns (string memory) {
+    function symbol() public view override virtual returns (string memory) {
         return _symbol;
     }
 
-    function circulatingSupply() public view override returns (uint256) {
+    function circulatingSupply() public view virtual override returns (uint256) {
         return _circulatingSupply;
     }
 
-    function increaseAllowance(address spender, uint256 amount) public override returns (bool) 
+    function increaseAllowance(address spender, uint256 amount) public virtual override returns (bool) 
     {
         uint256 currentAllowence = _allowence[msg.sender][spender];
 
@@ -74,7 +74,7 @@ contract ERC20 is IERC20, IOptionalERC20 {
         return true;
     }
 
-    function decreaseAllowance(address spender, uint256 amount) public override returns (bool) 
+    function decreaseAllowance(address spender, uint256 amount) public virtual override returns (bool) 
     {
         uint256 currentAllowence = _allowence[msg.sender][spender];
 
@@ -88,29 +88,29 @@ contract ERC20 is IERC20, IOptionalERC20 {
 
     // Implementation of IERC20 
 
-    function totalSupply() external view override returns (uint256) {
+    function totalSupply() external view virtual override returns (uint256) {
         return _totalSupply;
     }
 
-    function balanceOf(address account) external view override returns (uint256) {
+    function balanceOf(address account) external view virtual override returns (uint256) {
         return _balance[account];
     }
 
-    function transfer(address recipient, uint256 amount) external override returns (bool) 
+    function transfer(address recipient, uint256 amount) external virtual override returns (bool) 
     {      
         return _transfer(msg.sender, recipient, amount);
     }
 
-    function allowance(address owner, address spender) external view override returns (uint256) {
+    function allowance(address owner, address spender) external view virtual override returns (uint256) {
         return _allowence[owner][spender];
     }
 
-    function approve(address spender, uint256 amount) external override returns (bool) 
+    function approve(address spender, uint256 amount) external virtual override returns (bool) 
     {
         return _approve(spender, amount);
     }
 
-    function transferFrom(address sender, address recipient, uint256 amount) external override returns (bool) {
+    function transferFrom(address sender, address recipient, uint256 amount) external virtual override returns (bool) {
         require(_allowence[sender][msg.sender] >= amount, "ERC20: Transer amount exceeds allowance");
        
         bool success = _transfer(sender, recipient, amount);
