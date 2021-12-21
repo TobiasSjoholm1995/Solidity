@@ -58,7 +58,7 @@ contract LiquidityPool {
         require(_balance1 != 0 && _balance2 != 0, "Liquidity Pool: There is no available tokens.");
 
         // using the Constant Product Formula
-        uint256 product = _balance1 * _balance2;  // overflow, how to handle?
+        uint256 product = _balance1 * _balance2; 
 
         if (token1ForToken2) 
             return _balance2 - product / (_balance1 + amount);
@@ -87,8 +87,9 @@ contract LiquidityPool {
         _balance1 += amount;
         _balance2 += amount;
         _provider[msg.sender] += amount;
-    }
 
+        _overflowCheck();
+    }
 
     function withdraw(uint256 amount) external {
         require(_provider[msg.sender] >= amount, "Liquidity Pool: Withdraw amount exceeds provide amount.");
@@ -103,5 +104,14 @@ contract LiquidityPool {
         _balance1 -= amount;
         _balance2 -= amount;
         _provider[msg.sender] -= amount;
+    }
+
+    function _overflowCheck() private view {
+        unchecked {
+            uint256 product = _balance1 * _balance2;
+            uint256 sum     = _balance1 + _balance2;
+            require (product > _balance1 && product > _balance2, "Liquidity Pool: The deposit casued the pool to overflow.");
+            require (sum     > _balance1 && sum     > _balance2, "Liquidity Pool: The deposit casued the pool to overflow.");
+        }
     }
 }
