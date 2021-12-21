@@ -18,7 +18,7 @@ contract LeveragedToken is ERC20, Guardian {
     event Sell(address indexed seller, uint256 value);
 
     constructor(address token_, uint256 leverage_) ERC20(_name, _symbol, _totalSupply) {
-        require(leverage_ != 0, "Leveraged Token: Leverage can't be zero.")
+        require(leverage_ != 0, "Leveraged Token: Leverage can't be zero.");
         _mint(address(this), _totalSupply);
 
         token    = IERC20(token_);
