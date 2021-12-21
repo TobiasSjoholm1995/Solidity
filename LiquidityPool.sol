@@ -74,14 +74,6 @@ contract LiquidityPool {
         return returnAmount - fee;
     }
 
-    
-    function _percent(uint256 numerator, uint256 denominator) private pure returns(uint256 quotient) {
-        uint _numerator = numerator * 10 ** 2;
-        uint _quotient  = _numerator / denominator;
-
-        return _quotient;
-    }
-
 
     function deposit(uint256 amount) external {
         require(token1.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Token1 allowance too low.");
@@ -111,10 +103,16 @@ contract LiquidityPool {
         balance1 -= amount;
         balance2 -= amount;
         _provider[msg.sender] -= amount;
-        _giveReward(amount);
+        //_giveReward(amount);
     }
 
-    function _giveReward(uint256 withdrawAmount_) private{
+
+    function withdrawAmount(address account) external view returns (uint256) {
+        return _provider[account];
+    }
+
+
+    function _giveReward(uint256 withdrawAmount_) public {
         require(balance1 != 0 && balance2 != 0, "Liquidity Pool: There is no available tokens.");
         
         uint256 currentProduct     = balance1 * balance2;
@@ -134,9 +132,30 @@ contract LiquidityPool {
 
         _depositProduct = balance1 * balance2;
     }
-    
-    function withdrawAmount(address account) external view returns (uint256) {
-        return _provider[account];
+
+    function _getRewardAmount(uint256 withdrawAmount_) public view returns (uint256){
+        require(balance1 != 0 && balance2 != 0, "Liquidity Pool: There is no available tokens.");
+        
+        uint256 currentProduct     = balance1 * balance2;
+        uint256 percentTotalReward = (currentProduct * 100 / _depositProduct) - 100;
+        uint256 percentUserReward  = (withdrawAmount_ + withdrawAmount_) * 100 / (balance1 + balance2);
+
+        if (balance1 >= balance2) {
+            uint256 rewardAmount1 = (percentTotalReward * (percentUserReward * balance1)) / 10000;
+            return rewardAmount1;
+        }
+        else {
+            uint256 rewardAmount2 = (percentTotalReward * (percentUserReward * balance2)) / 10000;
+            return rewardAmount2;
+        }
     }
 
+       
+    function _percent(uint256 numerator, uint256 denominator) private pure returns(uint256 quotient) {
+        uint _numerator = numerator * 10 ** 2;
+        uint _quotient  = _numerator / denominator;
+
+        return _quotient;
+    }
+    
 }
