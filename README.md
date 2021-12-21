@@ -4,6 +4,12 @@ I am learning Solidity and in this repo you will find the contracts I have imple
 Don't use them as production code, this is just for fun and to learn.
 
 
+<b>ERC20:</b>
+
+This is my own implementation of the ERC20 token standard. 
+It's inspired by Open Zeppelin.
+
+
 <b>Guardian</b>
 
 Protects against a re-entrance attack.
@@ -14,10 +20,6 @@ Protects against a re-entrance attack.
 This is the interface from EIP-20.
 https://eips.ethereum.org/EIPS/eip-20
 
-<b>ERC20:</b>
-
-This is my own implementation of the ERC20 token standard. 
-It's inspired by Open Zeppelin.
 
 <b>KryptoKings Token:</b>
 
