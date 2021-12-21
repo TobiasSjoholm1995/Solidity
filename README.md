@@ -14,12 +14,12 @@ https://eips.ethereum.org/EIPS/eip-20
 This is my own implementation of the ERC20 token standard. 
 It's inspired by Open Zeppelin.
 
-<b>KryptoKingsToken</b>
+<b>KryptoKings Token</b>
 
 This is a concrete ERC20 token that can be used on any EVM compatible network. 
 It is inheriting from my ERC20 token implementation. 
 
-<b>TokenSwap</b>
+<b>Token Swap</b>
 
 The Token Swap allows 2 traders to trade with each other trustless.
 Trustless means that none of the traders need to trust the other trader to transfer the tokens.
