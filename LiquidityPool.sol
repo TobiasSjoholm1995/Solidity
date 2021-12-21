@@ -2,8 +2,9 @@
 pragma solidity ^0.8.0;
 
 import "./IERC20.sol";
+import "./Guardian.sol";  
 
-contract LiquidityPool {
+contract LiquidityPool is Guardian {
     IERC20 public immutable token1;
     IERC20 public immutable token2;
     uint256 public immutable waitingTime;
@@ -33,7 +34,7 @@ contract LiquidityPool {
     }
 
 
-    function swapToken1ForToken2(uint256 amount) external {
+    function swapToken1ForToken2(uint256 amount) external guard {
         uint256 returnAmount = getReturnAmount(amount, true);
 
         require(token1.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Allowance too low.");
@@ -48,7 +49,7 @@ contract LiquidityPool {
         _balance2 -= returnAmount;
     }
 
-    function swapToken2ForToken1(uint256 amount) external {
+    function swapToken2ForToken1(uint256 amount) external guard {
         uint256 returnAmount = getReturnAmount(amount, false);
 
         require(token2.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Allowance too low.");
@@ -85,7 +86,7 @@ contract LiquidityPool {
     }
 
 
-    function deposit(uint256 amount) external {
+    function deposit(uint256 amount) external guard {
         require(token1.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Token1 allowance too low.");
         require(token2.allowance(msg.sender, address(this)) >= amount, "Liquidity Pool: Token2 allowance too low.");
 
@@ -103,7 +104,7 @@ contract LiquidityPool {
         emit Deposit(msg.sender, amount);
     }
 
-    function withdraw(uint256 amount) external {
+    function withdraw(uint256 amount) external guard {
         require(_providers[msg.sender].Amount >= amount, "Liquidity Pool: Withdraw amount exceeds provide amount.");
         require(_providers[msg.sender].BlockNumber +  waitingTime <= block.number, "Liquidity Pool: You need to wait before you can withdraw.");
         require(_balance1 >= amount, "Liquidity Pool: There is not enough token1 balance to withdraw right now.");
@@ -152,7 +153,7 @@ contract LiquidityPool {
             return token2.transfer(msg.sender, rewardAmount2);
         }
     }
-       
+    
     function _percent(uint256 numerator, uint256 denominator) private pure returns(uint256 quotient) {
         uint _numerator = numerator * 10 ** 2;
         uint _quotient  = _numerator / denominator;
