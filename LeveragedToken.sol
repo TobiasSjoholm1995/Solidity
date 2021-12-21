@@ -27,7 +27,7 @@ contract LeveragedToken is ERC20, Guardian {
 
 
     function buy(uint256 amount) external guard {
-        require(amount % leverage == 0, "Leveraged Token: Amount must be even divisable with the leverage.");
+        require(amount % leverage == 0, "Leveraged Token: Amount must be even divisible with the leverage.");
         require(amount != 0, "Leveraged Token: Amount must be greater than zero.");
         require(token.allowance(msg.sender, address(this)) >= amount, "Leveraged Token: Allowance too low.");
 
