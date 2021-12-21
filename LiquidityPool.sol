@@ -18,8 +18,10 @@ contract LiquidityPool {
         uint256 BlockNumber;
     }
 
-
     mapping(address => Provider) private _providers;
+
+    event Deposit(address indexed provider, uint256 value);
+    event Withdraw(address indexed provider, uint256 value);
 
 
     constructor(address token1_, address token2_, uint256 waitingTime_) {
@@ -97,6 +99,8 @@ contract LiquidityPool {
         _providers[msg.sender].Amount += amount;
         _providers[msg.sender].BlockNumber = amount;
         _depositProduct = _balance1 * _balance2;
+
+        emit Deposit(msg.sender, amount);
     }
 
     function withdraw(uint256 amount) external {
@@ -115,6 +119,8 @@ contract LiquidityPool {
         _balance2 -= amount;
         _providers[msg.sender].Amount -= amount;
         _depositProduct = _balance1 * _balance2;
+
+        emit Withdraw(msg.sender, amount);
     }
 
 
@@ -155,3 +161,4 @@ contract LiquidityPool {
     }
     
 }
+
