@@ -28,7 +28,7 @@ Both traders instead set allowence to the smart contract and then the smart cont
 
 <b>Liquidity Pool:</b>
 
-The idea with the liquidity pool is that it will be possible to swap 2 different tokens between each other without it being another trader on the other side.
+The idea with the liquidity pool is that it will be possible to swap 2 different tokens with each other without it being another trader on the other side.
 
 It is an automated market maker, that will automatically adjust the price depending on the tokens balance in the pool.
 The price is adjusted according to the Constant Product Formula.
