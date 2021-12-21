@@ -108,10 +108,7 @@ contract LiquidityPool {
 
     function _overflowCheck() private view {
         unchecked {
-            uint256 product = _balance1 * _balance2;
-            uint256 sum     = _balance1 + _balance2;
-            require (product > _balance1 && product > _balance2, "Liquidity Pool: The deposit casued the pool to overflow.");
-            require (sum     > _balance1 && sum     > _balance2, "Liquidity Pool: The deposit casued the pool to overflow.");
+            require (_balance1 * _balance2 / _balance2 == _balance1, "Liquidity Pool: The deposit casued the pool to overflow.");
         }
     }
 }
