@@ -40,7 +40,7 @@ contract TokenSwap is Guardian {
     }
 
 
-    function swap() public guard {
+    function swap() external guard {
         require(msg.sender == account1 || msg.sender == account2, "Token Swap: Not authorized.");
         require(token1.allowance(account1, address(this)) >= amount1, "Token Swap: Too low allowence for token1.");
         require(token2.allowance(account2, address(this)) >= amount2, "Token Swap: Too low allowence for token2.");
