@@ -45,8 +45,8 @@ contract LeveragedToken is ERC20, Guardian {
         require(amount != 0, "Leveraged Token: Amount must be greater than zero.");
         require(this.allowance(msg.sender, address(this)) >= amount, "Leveraged Token: Allowance too low.");
 
-        bool success1 = this.transferFrom(msg.sender, address(this), amount);
-        bool success2 = token.transfer(msg.sender, amount * leverage);
+        bool success1 = token.transfer(msg.sender, amount * leverage);
+        bool success2 = this.transferFrom(msg.sender, address(this), amount);
         _circulatingSupply -= amount;
 
         require(success1 && success2, "Leveraged Token: Transfer of tokens failed.");
@@ -61,4 +61,3 @@ contract LeveragedToken is ERC20, Guardian {
     }
 
 }
-
