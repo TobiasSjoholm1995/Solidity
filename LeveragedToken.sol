@@ -9,10 +9,11 @@ contract LeveragedToken is ERC20, Guardian {
 
     string  constant private _name        = "LeverageToken";
     string  constant private _symbol      = "LT";
-    uint256 constant private _totalSupply = 1000000;
+    uint256 constant private _totalSupply = 2**256 - 1;
+    uint256 private _circulatingSupply;
 
-    IERC20 immutable token;
-    uint256 immutable leverage;
+    IERC20 public immutable token;
+    uint256 public immutable leverage;
 
     event Buy(address indexed buyer, uint256 value);
     event Sell(address indexed seller, uint256 value);
@@ -33,11 +34,13 @@ contract LeveragedToken is ERC20, Guardian {
 
         bool success1 = token.transferFrom(msg.sender, address(this), amount);
         bool success2 = this.transfer(msg.sender, amount / leverage);
+        _circulatingSupply += amount / leverage;
 
         require(success1 && success2, "Leveraged Token: Transfer of tokens failed.");
 
         emit Buy(msg.sender, amount);
     }
+
 
     function sell(uint256 amount) external guard {
         require(amount != 0, "Leveraged Token: Amount must be greater than zero.");
@@ -45,9 +48,17 @@ contract LeveragedToken is ERC20, Guardian {
 
         bool success1 = this.transferFrom(msg.sender, address(this), amount);
         bool success2 = token.transfer(msg.sender, amount * leverage);
+        _circulatingSupply -= amount;
 
         require(success1 && success2, "Leveraged Token: Transfer of tokens failed.");
 
         emit Sell(msg.sender, amount * leverage);
     }
+    
+
+    function circulatingSupply() public view override returns (uint256) {
+        return _circulatingSupply;
+    }
+
 }
+
