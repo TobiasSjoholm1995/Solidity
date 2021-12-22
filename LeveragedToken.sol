@@ -54,9 +54,10 @@ contract LeveragedToken is ERC20, Guardian {
 
         emit Sell(msg.sender, amount * leverage);
     }
-    
+
 
     function circulatingSupply() public view override returns (uint256) {
+        // amount of leveraged tokens outside of this contract
         return _circulatingSupply;
     }
 
