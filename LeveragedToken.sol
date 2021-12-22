@@ -28,13 +28,12 @@ contract LeveragedToken is ERC20, Guardian {
 
 
     function buy(uint256 amount) external guard {
-        require(amount % leverage == 0, "Leveraged Token: Amount must be even divisible with the leverage.");
         require(amount != 0, "Leveraged Token: Amount must be greater than zero.");
-        require(token.allowance(msg.sender, address(this)) >= amount, "Leveraged Token: Allowance too low.");
+        require(token.allowance(msg.sender, address(this)) >= amount * leverage, "Leveraged Token: Allowance too low.");
 
-        bool success1 = token.transferFrom(msg.sender, address(this), amount);
-        bool success2 = this.transfer(msg.sender, amount / leverage);
-        _circulatingSupply += amount / leverage;
+        bool success1 = token.transferFrom(msg.sender, address(this), amount * leverage);
+        bool success2 = this.transfer(msg.sender, amount);
+        _circulatingSupply += amount;
 
         require(success1 && success2, "Leveraged Token: Transfer of tokens failed.");
 
@@ -52,7 +51,7 @@ contract LeveragedToken is ERC20, Guardian {
 
         require(success1 && success2, "Leveraged Token: Transfer of tokens failed.");
 
-        emit Sell(msg.sender, amount * leverage);
+        emit Sell(msg.sender, amount);
     }
 
 
