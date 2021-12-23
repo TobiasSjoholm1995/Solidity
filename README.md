@@ -48,4 +48,14 @@ The price is adjusted according to the Constant Product Formula.
 
 Anyone can be a liquidity provider and receive rewards. 
 The rewards comes from the swap fees, which is 0.5%.
-It's a minimum waiting time, that is configured by the creator of the contract, before it's possible to withdraw the tokens from the pool and the reward.
+It's a minimum waiting time, that is configured by the publisher of the contract, before it's possible to withdraw the tokens from the pool and the reward.
+
+
+<b>Voting System:</b>
+
+This smart contract allows the publisher to create an election which contains a proposal that the voters can either agree or disagree on.
+The publisher becomes the "coordinator" of the election meaning he will be able to control when the election starts and ends and who will be able to vote.
+All relevant election information is transparent and stored on the blockchain with the help of the event functionality.
+
+
+
