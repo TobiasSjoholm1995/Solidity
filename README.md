@@ -55,7 +55,7 @@ It's a minimum waiting time, that is configured by the publisher of the contract
 
 This smart contract allows the publisher to create an election which contains a proposal that the voters can either agree or disagree on.
 The publisher becomes the "coordinator" of the election meaning he will be able to control when the election starts and ends and who will be able to vote.
-All relevant election information is transparent and stored on the blockchain with the help of the event functionality.
+All information regarding an election is transparent and stored on the blockchain with the help of the event functionality.
 
 
 
