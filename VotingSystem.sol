@@ -21,7 +21,7 @@ contract VotingSystem {
 
 
     event AddProposal(uint64 indexed id, string propsal);
-    event AddVoter(uint64 indexed id, address voter);
+    event AddVoters(uint64 indexed id, address[] voters);
     event StartVoting(uint64 indexed id);
     event EndVoting(uint64 indexed id, uint256 agrees, uint256 disagrees);
 
@@ -54,13 +54,14 @@ contract VotingSystem {
     }
 
 
-    function addVoter(address voter) 
+    function addVoters(address[] calldata voters) 
     external onlyCoordinator
     isState(State.Initialized)
     {
-        _voters[voter][_election.id] = true;
+        for (uint i = 0; i < voters.length ; i++) 
+            _voters[voters[i]][_election.id] = true;
 
-        emit AddVoter(_election.id, voter);
+        emit AddVoters(_election.id, voters);
     }
 
 
