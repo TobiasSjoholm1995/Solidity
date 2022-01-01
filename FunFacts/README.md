@@ -6,7 +6,7 @@ This file contains some famous hacks and recommendations.
 The list of hacks is great to read after every contract you implemented, to make sure you are not falling victim to any of the hacks.
 
 
-<b>Hacks:<b/>
+<u>Hacks:</u>
 - Hiding code with unverified address with same abi
 	
 - Re entry attack, send ether before updating state
@@ -39,7 +39,7 @@ The list of hacks is great to read after every contract you implemented, to make
 
 	
 
-<b>Memory Types:</b>
+<u>Memory Types:</u>
 	
 - The 4 memory types are: Storage, Memory, Calldata, stack
 	
@@ -50,7 +50,7 @@ The list of hacks is great to read after every contract you implemented, to make
 - Calldata can be used on function parameters that will only be read, lower gas fees.
 
 
-<b>Tips:</b>
+<u>Tips:</u>
 	
 - Use the Checks-Interactions-Effect pattern. 
 	
