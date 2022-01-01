@@ -1,6 +1,5 @@
-2021-12-01
-
 Each Solidity file in this folder contains a fun fact about Solidity.
+
 
 This file contains some famous hacks and recommendations.
 The list of hacks is great to read after every contract you implemented, to make sure you are not falling victim to any of the hacks.
