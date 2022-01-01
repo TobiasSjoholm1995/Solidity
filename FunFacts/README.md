@@ -53,12 +53,12 @@ __Transfer ETH:__
   The transfer function fails if the balance of the current contract is not large enough 
   or if the Ether transfer is rejected by the receiving account. 
   The transfer function reverts on failure.
-  It uses constant gas of 2300 to prevent re-entrance attack.
+  It uses constant gas of 2300 to prevent re-entrancy attack.
 
 - send(), not recommend anymore.
   Send is the low-level counterpart of transfer. 
   If the execution fails, the current contract will not stop with an exception, but send will return false.
-  It uses constant gas of 2300 to prevent re-entrance attack.
+  It uses constant gas of 2300 to prevent re-entrancy attack.
 
 - call{value: amount}("");
   This is the recommended way to transfer ether to another address after the Istanbul update, which increase the gas cost of SLOAD.
