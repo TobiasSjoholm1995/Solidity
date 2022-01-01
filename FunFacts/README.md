@@ -46,6 +46,24 @@ __Memory Types:__
 - Calldata can be used on function parameters that will be read-only, lower gas fees.
 
 
+__Transfer ETH:__  Always read offical updated documentation for this topic.
+- transfer(), not recommende anymore.
+  The transfer function fails if the balance of the current contract is not large enough 
+  or if the Ether transfer is rejected by the receiving account. 
+  The transfer function reverts on failure.
+  It uses constant gas of 2300 to prevent re-entrance attack.
+
+- send(), not recommend anymore.
+  Send is the low-level counterpart of transfer. 
+  If the execution fails, the current contract will not stop with an exception, but send will return false.
+  It uses constant gas of 2300 to prevent re-entrance attack.
+
+- call{value: amount}("");
+  This is the recommended way to transfer ether to another address after the Istanbul update, which increase the gas cost of SLOAD.
+  Call transfer all existing gas.
+  Remember the ("") part to actually make the call.
+
+
 __Tips:__
 	
 - Use the Checks-Interactions-Effect pattern. 
@@ -54,4 +72,6 @@ __Tips:__
 - include a fail safe mode
 	
 - limit the amount of money in the same contract, which will limit the amount of loss if failure/hacks happens.
+
+
 
