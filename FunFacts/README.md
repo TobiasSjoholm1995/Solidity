@@ -67,7 +67,9 @@ __Transfer ETH:__
 
 - call{value: amount}(""), this is currently the recommende way.
   Call transfer all existing gas.
-  Remember the ("") part to actually make the call.
+  Remember the ("") part to actually make the function call.
+  
+ 
 
 
 __Tips:__
