@@ -49,7 +49,6 @@ __Memory Types:__
 __Tips:__
 	
 - Use the Checks-Interactions-Effect pattern. 
-	
   Which states that first you use your require() statements, then you change the state of the contract then last you make external call.
 	
 - include a fail safe mode
