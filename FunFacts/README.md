@@ -8,7 +8,7 @@ The list of hacks is great to read after every contract you implemented, to make
 __Hacks:__
 - Hiding code with unverified address with same abi
 	
-- Re entry attack, send ether before updating state
+- Re-entry attack, send ether before updating state
 	
 - Unchecked overflow overflow
 
