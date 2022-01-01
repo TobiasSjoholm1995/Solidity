@@ -5,7 +5,7 @@ This file contains some famous hacks and recommendations.
 The list of hacks is great to read after every contract you implemented, to make sure you are not falling victim to any of the hacks.
 
 
-<u>Hacks:</u>
+__Hacks:__
 - Hiding code with unverified address with same abi
 	
 - Re entry attack, send ether before updating state
