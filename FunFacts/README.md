@@ -23,11 +23,8 @@ __Hacks:__
 - Force send Eth with selfdestruct()
 
 - Denail of service, can't make any external calls or send eth to another contract.
-
   Never assume that an external function has a correct implementation.
-
   DOS can cause your contract to enter a trap state where nothing can happen.
-
   Use Withdraw-pattern to prevent this or try-catch handling.
 
 - tx.origin can't be trusted due to malicious forward calls.
@@ -38,7 +35,7 @@ __Hacks:__
 
 	
 
-<u>Memory Types:</u>
+__Memory Types:__
 	
 - The 4 memory types are: Storage, Memory, Calldata, stack
 	
@@ -49,7 +46,7 @@ __Hacks:__
 - Calldata can be used on function parameters that will only be read, lower gas fees.
 
 
-<u>Tips:</u>
+__Tips:__
 	
 - Use the Checks-Interactions-Effect pattern. 
 	
