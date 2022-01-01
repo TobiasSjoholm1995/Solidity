@@ -47,7 +47,9 @@ __Memory Types:__
 
 
 __Transfer ETH:__  
-- Always read offical up-to-date documentation on how to transfer Ether.
+- Always read offical up-to-date documentation on how to transfer Ether. 
+
+- Generally recommended to use a withdraw pattern intead of sending ether directly.
 
 - transfer(), not recommende anymore.
   The transfer function fails if the balance of the current contract is not large enough 
@@ -57,9 +59,9 @@ __Transfer ETH:__
 
 - send(), not recommend anymore.
   Send is the low-level counterpart of transfer. 
-  If the execution fails, the current contract will not stop with an exception, but send will return false.
+  If the execution fails, the current contract will not stop with an exception, but send() will return false.
   It uses constant gas of 2300 to prevent re-entrancy attack.
-
+  There are some dangers in using send(): The transfer fails if the call stack depth is at 1024 (this can always be forced by the caller).
 - call{value: amount}("");
   This is the recommended way to transfer ether to another address after the Istanbul update, which increase the gas cost of SLOAD.
   Call transfer all existing gas.
