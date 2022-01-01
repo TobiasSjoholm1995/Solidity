@@ -46,7 +46,9 @@ __Memory Types:__
 - Calldata can be used on function parameters that will be read-only, lower gas fees.
 
 
-__Transfer ETH:__  Always read offical up-to-date documentation on how to transfer Ether.
+__Transfer ETH:__  
+- Always read offical up-to-date documentation on how to transfer Ether.
+
 - transfer(), not recommende anymore.
   The transfer function fails if the balance of the current contract is not large enough 
   or if the Ether transfer is rejected by the receiving account. 
