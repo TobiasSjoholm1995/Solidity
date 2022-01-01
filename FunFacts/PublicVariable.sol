@@ -9,23 +9,36 @@ pragma solidity ^0.8.0;
 
 contract PublicVariable {
 
-    uint256 public MyValue = 5;
+    uint256 public MyNumber = 5;
+
+    uint256[] public myArray = [1,2,3,4,5];
 
 
-    function test() external view returns (uint) {
+    function testNumber() external view returns (uint) {
 
         // property access within the contract;
-        uint v1 = MyValue;
+        uint v1 = MyNumber;
 
         PublicVariable thisContract = PublicVariable(this);
 
         // function access outside the contract 
-        uint v2 = thisContract.MyValue();
+        uint v2 = thisContract.MyNumber();
         
         // function access with the 'this' keyword 
-        uint v3 = this.MyValue();
+        uint v3 = this.MyNumber();
 
         return v1 + v2 + v3;
+    }
+
+    
+    function testArray() external view returns (uint) {
+        PublicVariable thisContract = PublicVariable(this);
+
+        // arrays automatically get an function that takes an parameter as input, the index 
+        uint index = 2;
+        uint value = thisContract.myArray(index);
+        
+        return value;
     }
     
 }
