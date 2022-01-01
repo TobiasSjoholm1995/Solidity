@@ -17,6 +17,7 @@ Hacks:
   Use Withdraw-pattern to prevent this or try-catch handling.
 - tx.origin can't be trusted due to malicious forward calls.
 - extcodesize() is 0 for a contract in the same transaction as it's deployed (constructor call)
+- be careful assigning to multiple variables at the same time (typle syntax) when reference types are involved, can lead to unexpected copy behaviour.
 
 	
 
