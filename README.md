@@ -3,9 +3,12 @@
 I am learning Solidity and in this repo you will find the contracts I have implemented. 
 Don't use them as production code, this is just for fun and to learn.
 
-<b>Fun Facts Folder</b>
+
+<b>Fun Facts Folder:</b>
+
 This folder contains multiple solidity files, where each file share a fun fact about how Solidity works.
 Great for new to intermediate solidity programmers.
+
 
 
 <b>ERC20:</b>
