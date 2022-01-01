@@ -1,3 +1,7 @@
+This file contains some recommendations and tips for solidity programmers. Written in 2021.
+The list of hacks is great to read after every contract you implemented, to make sure you are not falling victim to any of the hacks.
+
+
 Hacks:
 - Hiding code with unverified address with same abi
 - Re entry attack, send ether before updating state
@@ -16,19 +20,16 @@ Hacks:
 
 	
 
-Memory Types: 
-Storage, Memory, Calldata, stack
+Memory Types:   
+- The 4 memory types are: Storage, Memory, Calldata, stack
 - Variable assignment  memory ←→ storage always creates a copy
-
 - Storage is default for state variables and creates high fees.
-
 - Calldata can be used on function parameters that will only be read, lower gas fees.
 
 
 Tips:
-
 - Use the Checks-Interactions-Effect pattern. 
-  Which states that first you use your require() statements, then you vchange the state of the conract then last you make external call.
+  Which states that first you use your require() statements, then you change the state of the contract then last you make external call.
 - include a fail safe mode
 - limit the amount of money in the same contract, which will limit the amount of loss if failure/hacks happens.
 
