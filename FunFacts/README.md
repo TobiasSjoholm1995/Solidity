@@ -66,7 +66,7 @@ __Transfer ETH:__
   There are some dangers in using send(): The transfer fails if the call stack depth is at 1024 (this can always be forced by the caller).
 
 - call{value: amount}(""), this is currently the recommende way.
-  Call transfer all existing gas.
+  Call transfer all existing gas. Call function returns an boolean and bytes, the boolean represent of the call was successful and the bytes is the return value.
   Remember the ("") part to actually make the function call.
   
  
