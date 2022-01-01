@@ -2,7 +2,8 @@
 pragma solidity ^0.8.0;
 
 
-// Fun Fact - This is how you can use the lower level function 'call'
+// Fun Fact:
+// This is how you can use the lower level function 'call'
 
 
 contract DummyContract {
