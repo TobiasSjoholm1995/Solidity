@@ -31,7 +31,7 @@ __Hacks:__
 
 - extcodesize() is 0 for a contract in the same transaction as it's deployed (constructor call)
 
-- be careful assigning to multiple variables at the same time (typle syntax) when reference types are involved, can lead to unexpected copy behaviour.
+- be careful assigning to multiple variables at the same time (tuple syntax) when reference types are involved, can lead to unexpected copy behaviour.
 
 	
 
