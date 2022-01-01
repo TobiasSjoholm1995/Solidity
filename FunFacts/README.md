@@ -10,7 +10,7 @@ __Hacks:__
 	
 - Re-entry attack, send ether before updating state
 	
-- Unchecked overflow overflow
+- Unchecked overflow/underflow
 
 - Front running attack
 
