@@ -43,7 +43,7 @@ __Memory Types:__
 	
 - Storage is default for state variables and creates high fees.
 	
-- Calldata can be used on function parameters that will only be read, lower gas fees.
+- Calldata can be used on function parameters that will be read-only, lower gas fees.
 
 
 __Tips:__
