@@ -49,7 +49,7 @@ __Memory Types:__
 __Transfer ETH:__  
 - Always read offical up-to-date documentation on how to transfer Ether. 
 
-- Generally recommended to use a withdraw pattern intead of sending ether directly.
+- Generally recommended to use a withdraw pattern instead of sending ether directly.
 
 - The Istanbul hard fork (EIP 1884) changed how we transfer Eth, gas is no longer constant. SLOAD has increased its gas uses.
 
