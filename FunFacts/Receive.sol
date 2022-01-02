@@ -61,7 +61,6 @@ contract Caller {
         return (success, data);
     }
 
-
     function callReceive() external payable returns (bool, bytes memory) {
         (bool success, bytes memory data) = a.call{value: msg.value}("");   
         return (success, data);
