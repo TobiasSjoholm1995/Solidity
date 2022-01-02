@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+// Fun Fact:
+// receive and fallback are two special functions
 
-contract Test {
-    uint public counter = 0;
-    event Log(string messsage, uint amount);
 
 /*
-        Which function is called, fallback() or receive()?
+ Which function is called, fallback() or receive()?
 
             send Ether
                 |
@@ -21,6 +20,10 @@ contract Test {
             /      \
         receive()   fallback()
 */
+
+contract Test {
+    uint public counter = 0;
+    event Log(string messsage, uint amount);
 
     receive() external payable 
     {
